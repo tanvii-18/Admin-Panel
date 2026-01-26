@@ -2,18 +2,22 @@ import { AuthCollection } from "../models/authModel.js";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcrypt";
 
-export const signup = (req, res) => {
+export const signup = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const hashed = bcrypt.hash(password, 12);
+    const hashed = await bcrypt.hash(password, 12);
 
-    AuthCollection.create({ email, password: hashed });
+    await AuthCollection.create({ email, password: hashed });
 
-    User.create({ email });
+    await User.create({ email });
 
     res.json({ status: true, message: "User Registered Successfully!" });
   } catch (error) {
-    res.json({ status: false, message: "Can't Register User!" });
-    console.log(error);
+    res.json({
+      status: false,
+      message: "Can't Register User!",
+      error: error.message,
+    });
+    console.log(error.message);
   }
 };
