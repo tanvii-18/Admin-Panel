@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-import { generateOtp } from "../utils/global_functions";
-import { otpCollection } from "../models/otpModel";
+import { generateOtp } from "../utils/global_functions.js";
+import { otpCollection } from "../models/otpModel.js";
 
 dotenv.config();
 
