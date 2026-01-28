@@ -50,7 +50,7 @@ export const loginUser = async (req, res) => {
         .json({ status: false, message: "Invalid Password!" });
     }
 
-    const otp = sendOTP(email);
+    const otp = await sendOTP(email);
 
     res
       .status(200)
@@ -59,3 +59,7 @@ export const loginUser = async (req, res) => {
     return res.json({ status: false, message: error.message });
   }
 };
+
+//* otp verification
+
+export const verifyOtp = (reqq, res) => {};

@@ -26,4 +26,18 @@ export const signupUser = (req, res, next) => {
   next();
 };
 
-export const signinUser = (req, res, next) => {};
+export const signinUser = (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ status: false, message: "Email Requires!" });
+  }
+
+  if (!password) {
+    return res
+      .status(400)
+      .json({ status: false, message: "Password Requires!" });
+  }
+
+  next();
+};
