@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 export const signup = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const hashed = await bcrypt.hash(password, 12);
+    const hashed = await bcrypt.hash(password.toString(), 12);
 
     await AuthCollection.create({ email, password: hashed });
 

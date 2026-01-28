@@ -6,7 +6,7 @@ export const signupUser = (req, res, next) => {
   }
 
   if (!password) {
-    return res.json({ status: false, message: "Email Requires!" });
+    return res.json({ status: false, message: "Password Requires!" });
   }
 
   next();
