@@ -22,26 +22,12 @@ export const signup = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
+export const loginUser = async (req, res) => {
   const { email, password } = req.body;
+
   try {
-    const existingUser = AuthCollection.findOne({ email });
-
-    if (!existingUser) {
-      res.json({ status: false, message: "User Not Found!" });
-    }
-
-    const isMatched = await bcrypt.compare(password, existingUser.password);
-
-    if (!isMatched) {
-      res.json({ status: false, message: "Incorrect Password!" });
-    }
-
-    const isOtpSend = await otpSend(email);
-
-    res.json(isOtpSend);
+    const user = await AuthCollection.findOne({ email });
   } catch (error) {
-    console.log(error);
     return res.json({ status: false, message: error.message });
   }
 };

@@ -11,3 +11,5 @@ export const signupUser = (req, res, next) => {
 
   next();
 };
+
+export const signinUser = (req, res, next) => {};
