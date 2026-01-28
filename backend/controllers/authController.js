@@ -62,4 +62,4 @@ export const loginUser = async (req, res) => {
 
 //* otp verification
 
-export const verifyOtp = (reqq, res) => {};
+export const verifyOtp = (req, res) => {};
