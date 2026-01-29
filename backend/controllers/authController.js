@@ -62,4 +62,11 @@ export const loginUser = async (req, res) => {
 
 //* otp verification
 
-export const verifyOtp = (req, res) => {};
+export const verifyOtp = (req, res) => {
+  const { email, otp } = req.body;
+
+  try {
+  } catch (error) {
+    return res.status(500).json({ status: false, message: error.message });
+  }
+};
