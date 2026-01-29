@@ -2,6 +2,7 @@ import { AuthCollection } from "../models/authModel.js";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import { sendOTP } from "../services/otp_services.js";
+import { otpCollection } from "../models/otpModel.js";
 
 export const signup = async (req, res) => {
   const { email, password } = req.body;
@@ -62,11 +63,33 @@ export const loginUser = async (req, res) => {
 
 //* otp verification
 
-export const verifyOtp = (req, res) => {
+export const verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
 
   try {
+    const otpRecord = await otpCollection.findOne({ email, otp });
+
+    const isOtpMatched = otpCollection.compare(otp, otpRecord.otp);
+
+    if (!isOtpMatched) {
+      return res.status(400).json({ status: false, message: "Incorrect OTP!" });
+    }
+
+    if (otpRecord.expiryAt < new Date(Date.now())) {
+      return res.status(400).json({ status: false, message: "OTP expired." });
+    }
+
+    await otpCollection.deleteMany({ email });
+
+    res.status(200).json({
+      status: true,
+      message: "OTP verified! User LogIn Successfully.",
+    });
   } catch (error) {
-    return res.status(500).json({ status: false, message: error.message });
+    return res.status(500).json({
+      status: false,
+      message: "OTP verification Failed.",
+      error: error.message,
+    });
   }
 };
