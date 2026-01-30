@@ -109,7 +109,7 @@ export const verifyOtp = async (req, res) => {
       message: "OTP is verified & Signin successfully !",
     });
   } catch (error) {
-    console.log("Catch block", error);
+    // console.log("Catch block", error);
 
     return res
       .status(500)
@@ -117,34 +117,32 @@ export const verifyOtp = async (req, res) => {
   }
 };
 
-// export const verifyOtp = async (req, res) => {
-//   const { email, otp } = req.body;
+// change password
 
-//   try {
-//     const otpRecord = await otpCollection.findOne({ email });
+export const changePassword = (req, res) => {
+  const {} = req.body;
 
-//     const isOtpMatched = await bcrypt.compare(otp, otpRecord.otp);
+  try {
+  } catch (error) {
+    // console.log("Catch block", error);
 
-//     if (!isOtpMatched) {
-//       return res.status(400).json({ status: false, message: "Incorrect OTP!" });
-//     }
+    return res
+      .status(500)
+      .json({ status: false, message: "Password Can't Change." });
+  }
+};
 
-//     if (otpRecord.expiryAt < new Date(Date.now())) {
-//       return res.status(400).json({ status: false, message: "OTP expired." });
-//     }
+// forgot password
 
-//     await otpCollection.deleteMany({ email });
+export const forgotPassword = (req, res) => {
+  const {} = req.body;
 
-//     res.status(200).json({
-//       status: true,
-//       message: "OTP verified! User LogIn Successfully.",
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json({
-//       status: false,
-//       message: "OTP verification Failed.",
-//       error: error.message,
-//     });
-//   }
-// };
+  try {
+  } catch (error) {
+    // console.log("Catch block", error);
+
+    return res
+      .status(500)
+      .json({ status: false, message: "Password Can't Change." });
+  }
+};
