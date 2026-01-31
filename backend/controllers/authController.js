@@ -119,13 +119,34 @@ export const verifyOtp = async (req, res) => {
 
 // change password
 
-export const changePassword = (req, res) => {
-  const {} = req.body;
+export const changePassword = async (req, res) => {
+  const { email, password, newPassword } = req.body;
 
   try {
+    const user = await AuthCollection.findOne({ email });
+
+    // comparing database password & user entered password
+    const isPasswordMatched = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatched) {
+      return res
+        .status(400)
+        .json({ status: false, message: "Incorrect Password!" });
+    }
+
+    // new password hasing
+    const hasedpassword = await bcrypt.hash(newPassword, 12);
+
+    await AuthCollection.updateOne(
+      { email },
+      { $set: { newPassword: hasedpassword } },
+    );
+
+    res
+      .status(200)
+      .json({ status: true, message: "Password Changed Successfully!" });
   } catch (error) {
     // console.log("Catch block", error);
-
     return res
       .status(500)
       .json({ status: false, message: "Password Can't Change." });
@@ -140,7 +161,6 @@ export const forgotPassword = (req, res) => {
   try {
   } catch (error) {
     // console.log("Catch block", error);
-
     return res
       .status(500)
       .json({ status: false, message: "Password Can't Change." });
