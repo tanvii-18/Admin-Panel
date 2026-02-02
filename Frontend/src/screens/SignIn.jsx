@@ -1,7 +1,31 @@
 import React from "react";
 import { Link } from "react-router";
+import { useState } from "react";
+import axios from "axios";
+import { api_auth } from "../utils/apiRoutes";
+import { Navigate } from "react-router";
 
 export default function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      const user = { email, password };
+
+      const res = await axios.post(`${api_auth}/signin`, user);
+      console.log(res.data);
+
+      if (res.data.status) {
+        alert(res.data.message);
+        <Navigate to="/verify-otp" />;
+      }
+    } catch (error) {
+      console.error("SignIn Error:", error);
+      alert(error.message);
+    }
+  };
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="h-[450px] w-[450px] py-6 rounded-3xl shadow-neutral-400 shadow-lg">
@@ -73,6 +97,7 @@ export default function SignIn() {
           <button
             type="submit"
             className="w-90 bg-gray-800 text-white px-4 py-[11px] rounded-full hover:bg-gray-700 my-5 cursor-pointer"
+            onClick={handleSignIn}
           >
             Sign In
           </button>
