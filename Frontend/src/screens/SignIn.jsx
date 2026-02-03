@@ -1,10 +1,28 @@
 import { Link } from "react-router";
 import { authRoutes } from "../utils/apiRoutes";
 import { useState } from "react";
+import axios from "axios";
+import { toast } from "sonner";
 
 export default function SignIn() {
-  const [email, setEmail] = useState("abc");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [isLoading, setIsLoading] = useState(false);
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+
+    const user = { email, password };
+    try {
+      const res = await axios.post(`${authRoutes}/signin`, user);
+
+      console.log(res.data.message);
+
+      toast.success(res.data.status);
+    } catch (error) {
+      toast.error(error.response?.data);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
@@ -24,7 +42,10 @@ export default function SignIn() {
           </span>
         </div>
 
-        <form className="flex flex-col items-center mt-8">
+        <form
+          className="flex flex-col items-center mt-8"
+          onSubmit={handleSignIn}
+        >
           <div className="flex flex-col justify-center items-center gap-2">
             <div className="flex flex-col w-90 gap-2">
               <label htmlFor="email" className="px-2 text-[15px] font-medium">
@@ -35,7 +56,7 @@ export default function SignIn() {
                 id="email"
                 placeholder="Email"
                 value={email}
-                onClick={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 className="mb-4 px-5 py-3 border border-gray-400 rounded-full text-[14px] bg-[#efefef] outline-0"
               />
             </div>
@@ -54,7 +75,7 @@ export default function SignIn() {
                   id="password"
                   placeholder="Password"
                   value={password}
-                  onClick={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="px-5 py-3 w-full border border-gray-400 rounded-full text-[14px] bg-[#efefef] outline-0"
                 />
 

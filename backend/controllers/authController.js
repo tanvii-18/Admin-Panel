@@ -52,7 +52,7 @@ export const loginUser = async (req, res) => {
     if (!isPasswordMatched) {
       return res
         .status(401)
-        .json({ status: false, message: "Invalid Password!" });
+        .json({ status: false, message: "Incorrect Password!" });
     }
 
     const otp = await sendOTP(email);
