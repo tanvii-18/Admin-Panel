@@ -1,1 +1,1 @@
-export const api_auth = "http://localhost:4000/api/auth";
+export const authRoutes = "http://localhost:4000/api/auth";

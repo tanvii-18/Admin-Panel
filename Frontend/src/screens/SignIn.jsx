@@ -1,25 +1,10 @@
 import { Link } from "react-router";
-// import { useState } from "react";
-// import axios from "axios";
-// import { api_auth } from "../utils/apiRoutes";
-// import { Navigate } from "react-router";
+import { authRoutes } from "../utils/apiRoutes";
+import { useState } from "react";
 
 export default function SignIn() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
-  // const handleSignIn = async (e) => {
-  //   e.preventDefault();
-  //   const userData = { email, password };
-
-  //   try {
-  //     const res = await axios.post(`${api_auth}/login`, userData);
-
-  //     console.log(res.data);
-  //   } catch (error) {
-  //     alert(error.message);
-  //   }
-  // };
+  const [email, setEmail] = useState("abc");
+  const [password, setPassword] = useState("123456");
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
@@ -39,10 +24,7 @@ export default function SignIn() {
           </span>
         </div>
 
-        <form
-          className="flex flex-col items-center mt-8"
-          // onSubmit={handleSignIn}
-        >
+        <form className="flex flex-col items-center mt-8">
           <div className="flex flex-col justify-center items-center gap-2">
             <div className="flex flex-col w-90 gap-2">
               <label htmlFor="email" className="px-2 text-[15px] font-medium">
@@ -50,11 +32,11 @@ export default function SignIn() {
               </label>
               <input
                 type="email"
-                // value={email}
                 id="email"
                 placeholder="Email"
+                value={email}
+                onClick={(e) => setEmail(e.target.value)}
                 className="mb-4 px-5 py-3 border border-gray-400 rounded-full text-[14px] bg-[#efefef] outline-0"
-                // onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -69,11 +51,11 @@ export default function SignIn() {
               <div className="relative w-90">
                 <input
                   type="password"
-                  // value={password}
                   id="password"
                   placeholder="Password"
+                  value={password}
+                  onClick={(e) => setPassword(e.target.value)}
                   className="px-5 py-3 w-full border border-gray-400 rounded-full text-[14px] bg-[#efefef] outline-0"
-                  // onChange={(e) => setPassword(e.target.value)}
                 />
 
                 <svg
