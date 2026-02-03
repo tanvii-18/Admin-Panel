@@ -1,31 +1,26 @@
-import React from "react";
 import { Link } from "react-router";
-import { useState } from "react";
-import axios from "axios";
-import { api_auth } from "../utils/apiRoutes";
-import { Navigate } from "react-router";
+// import { useState } from "react";
+// import axios from "axios";
+// import { api_auth } from "../utils/apiRoutes";
+// import { Navigate } from "react-router";
 
 export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      const user = { email, password };
+  // const handleSignIn = async (e) => {
+  //   e.preventDefault();
+  //   const userData = { email, password };
 
-      const res = await axios.post(`${api_auth}/signin`, user);
-      console.log(res.data);
+  //   try {
+  //     const res = await axios.post(`${api_auth}/login`, userData);
 
-      if (res.data.status) {
-        alert(res.data.message);
-        <Navigate to="/verify-otp" />;
-      }
-    } catch (error) {
-      console.error("SignIn Error:", error);
-      alert(error.message);
-    }
-  };
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     alert(error.message);
+  //   }
+  // };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="h-[450px] w-[450px] py-6 rounded-3xl shadow-neutral-400 shadow-lg">
@@ -44,7 +39,10 @@ export default function SignIn() {
           </span>
         </div>
 
-        <form className="flex flex-col items-center mt-8">
+        <form
+          className="flex flex-col items-center mt-8"
+          // onSubmit={handleSignIn}
+        >
           <div className="flex flex-col justify-center items-center gap-2">
             <div className="flex flex-col w-90 gap-2">
               <label htmlFor="email" className="px-2 text-[15px] font-medium">
@@ -52,9 +50,11 @@ export default function SignIn() {
               </label>
               <input
                 type="email"
+                // value={email}
                 id="email"
                 placeholder="Email"
                 className="mb-4 px-5 py-3 border border-gray-400 rounded-full text-[14px] bg-[#efefef] outline-0"
+                // onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -69,9 +69,11 @@ export default function SignIn() {
               <div className="relative w-90">
                 <input
                   type="password"
+                  // value={password}
                   id="password"
                   placeholder="Password"
                   className="px-5 py-3 w-full border border-gray-400 rounded-full text-[14px] bg-[#efefef] outline-0"
+                  // onChange={(e) => setPassword(e.target.value)}
                 />
 
                 <svg
@@ -97,7 +99,6 @@ export default function SignIn() {
           <button
             type="submit"
             className="w-90 bg-gray-800 text-white px-4 py-[11px] rounded-full hover:bg-gray-700 my-5 cursor-pointer"
-            onClick={handleSignIn}
           >
             Sign In
           </button>
