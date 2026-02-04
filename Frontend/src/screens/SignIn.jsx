@@ -7,10 +7,13 @@ import { toast } from "sonner";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+
+    setIsLoading(true);
+    const toastId = toast.loading("Please wait...");
 
     const user = { email, password };
     try {
@@ -18,9 +21,9 @@ export default function SignIn() {
 
       console.log(res.data.message);
 
-      toast.success(res.data.status);
+      toast.success(res.data.message, { id: toastId });
     } catch (error) {
-      toast.error(error.response?.data);
+      toast.error(error.response.data.message, { id: toastId });
     }
   };
 
