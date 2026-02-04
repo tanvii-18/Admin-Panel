@@ -3,7 +3,7 @@ export const signupUser = (req, res, next) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!email) {
-    return res.json({ status: false, message: "Email Requires!" });
+    return res.status(400).json({ status: false, message: "Email Requires!" });
   }
 
   if (!emailRegex.test(email)) {
@@ -13,7 +13,9 @@ export const signupUser = (req, res, next) => {
   }
 
   if (!password) {
-    return res.json({ status: false, message: "Password Requires!" });
+    return res
+      .status(400)
+      .json({ status: false, message: "Password Requires!" });
   }
 
   if (password.length < 8) {

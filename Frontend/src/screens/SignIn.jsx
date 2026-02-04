@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { authRoutes } from "../utils/apiRoutes";
 import { useState } from "react";
 import axios from "axios";
@@ -8,6 +8,8 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ export default function SignIn() {
       console.log(res.data.message);
 
       toast.success(res.data.message, { id: toastId });
+      navigate("/verify-otp");
     } catch (error) {
       toast.dismiss(toastId);
       toast.error(error.response?.data?.message);
