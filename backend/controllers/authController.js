@@ -50,7 +50,9 @@ export const loginUser = async (req, res) => {
     const isPasswordMatched = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatched) {
-      return res.json({ status: false, message: "Incorrect Password!" });
+      return res
+        .status(400)
+        .json({ status: false, message: "Incorrect Password!" });
     }
 
     const otp = await sendOTP(email);

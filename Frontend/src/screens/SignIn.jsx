@@ -12,6 +12,8 @@ export default function SignIn() {
   const handleSignIn = async (e) => {
     e.preventDefault();
 
+    if (isLoading) return;
+
     setIsLoading(true);
     const toastId = toast.loading("Please wait...");
 
@@ -23,7 +25,10 @@ export default function SignIn() {
 
       toast.success(res.data.message, { id: toastId });
     } catch (error) {
-      toast.error(error.response.data.message, { id: toastId });
+      toast.dismiss(toastId);
+      toast.error(error.response?.data?.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -104,6 +109,7 @@ export default function SignIn() {
           </div>
           <button
             type="submit"
+            disabled={isLoading}
             className="w-90 bg-gray-800 text-white px-4 py-[11px] rounded-full hover:bg-gray-700 my-5 cursor-pointer"
           >
             Sign In
