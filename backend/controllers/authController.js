@@ -155,14 +155,78 @@ export const changePassword = async (req, res) => {
 
 // forgot password
 
-export const forgotPassword = (req, res) => {
-  const {} = req.body;
+export const forgetPassword = async (req, res) => {
+  const { email } = req.body;
+  const user = await AuthCollection.findOne({ email });
+  if (!user) {
+    return res.status(404).json({ status: false, message: "user not found !" });
+  }
+  const isOtpSent = await otpSender(email);
+  res.json(isOtpSent);
+};
 
+export const verifyOtpForgetPass = async (req, res) => {
+  const { email, otp, newPassword } = req.body;
   try {
-  } catch (error) {
-    // console.log("Catch block", error);
-    return res
-      .status(500)
-      .json({ status: false, message: "Password Can't Change." });
+    const record = await otpCollection.findOne({ email, otp });
+    if (!record) {
+      return res.json({ status: false, message: "Incorrect Otp!" });
+    }
+    if (record.expiryAt < new Date(Date.now())) {
+      return res.json({ status: false, message: "otp is expired!" });
+    }
+    const hashed = await bcrypt.hash(newPassword, 12);
+    await AuthCollection.updateOne(
+      { email },
+      {
+        $set: {
+          password: hashed,
+        },
+      },
+    );
+    return res.json({
+      status: false,
+      message: "password updated successfully!",
+    });
+  } catch (err) {
+    return res.json({ status: false, message: "Password can't updated!" });
+  }
+};
+
+export const getCurrentUser = async (req, res) => {
+  try {
+    const token = req.cookies.auth_token;
+    const decoded = jwt.verify(token, process.env.SECRET_KEY, {
+      expiresIn: "1d",
+    });
+    if (decoded) {
+      const user = await AuthCollection.findById(decoded._doc._id).populate(
+        "user",
+        "-createdAt -__v -updatedAt",
+      );
+      return res.json({
+        status: true,
+        message: "Current user fetched successfully !",
+        user,
+      });
+    } else {
+      return res.json({ status: false, message: "cant get current user !" });
+    }
+  } catch (err) {
+    return res.json({ status: false, message: err.message });
+  }
+};
+
+// Sign Out
+export const signout = (req, res) => {
+  try {
+    res.clearCookie("auth_token", {
+      maxAge: 1000 * 60 * 60 * 24,
+      sameSite: "strict",
+      httpOnly: true,
+    });
+    res.json({ status: true, message: "signout successfully!" });
+  } catch (err) {
+    res.json({ status: false, message: "signout failed!" });
   }
 };

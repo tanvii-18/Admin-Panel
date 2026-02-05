@@ -45,11 +45,13 @@ export default function Verify_otp() {
             maxLength={6}
             value={otp}
             onChange={setOtp}
+            autoFocus
             render={({ slots }) => (
               <div className="flex justify-center gap-3 mt-6">
                 {slots.map((slot, index) => (
                   <div
                     key={index}
+                    ref={slot.ref}
                     {...slot.props}
                     className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-xl text-lg focus-within:ring-2 focus-within:ring-blue-500"
                   />

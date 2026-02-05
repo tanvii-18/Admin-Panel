@@ -1,0 +1,58 @@
+export const updateProfileByAdmin = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await UserCollection.updateOne({ email }, { $set: req.body });
+    const token = jwt.sign({ ...user }, process.env.SECRET_KEY, {
+      expiresIn: "1d",
+    });
+    res.cookie("auth_token", token, {
+      maxAge: 1000 * 60 * 60 * 24,
+      sameSite: "strict",
+      httpOnly: true,
+    });
+    return res.json({
+      status: true,
+      message: "profile updated successfully",
+    });
+  } catch (err) {
+    return res.status(500).json({ status: false, message: err.message });
+  }
+};
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await UserCollection.find();
+    res.json({ status: true, message: "User Fetched Successfully ", users });
+  } catch (err) {
+    res.json({ status: false, message: "Cant get users!", users: [] });
+  }
+};
+
+export const getUserById = async (req, res) => {
+  const id = req.query.id;
+  console.log(id);
+  try {
+    const user = await UserCollection.findById(id);
+    return res.json({
+      status: true,
+      message: "user fetched successfully!",
+      user,
+    });
+  } catch (err) {
+    return res.json({ status: false, message: err.message });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  const id = req.query.id;
+  try {
+    await UserCollection.findByIdAndDelete(id);
+    return res.json({
+      status: true,
+      message: "user Deleted Successfully!",
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.json({ status: false, message: err.message });
+  }
+};
