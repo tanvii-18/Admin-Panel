@@ -1,27 +1,45 @@
-export const updateProfileByAdmin = async (req, res) => {
-  const { email } = req.body;
+import { User } from "../models/userModel";
+
+//* Update Profile By user
+export const updateProfileByUser = async (req, res) => {
+  const {
+    email,
+    name,
+    joining_date,
+    profile_pic,
+    phone,
+    education,
+    exp,
+    address,
+  } = req.body;
   try {
-    const user = await UserCollection.updateOne({ email }, { $set: req.body });
-    const token = jwt.sign({ ...user }, process.env.SECRET_KEY, {
-      expiresIn: "1d",
-    });
-    res.cookie("auth_token", token, {
-      maxAge: 1000 * 60 * 60 * 24,
-      sameSite: "strict",
-      httpOnly: true,
-    });
-    return res.json({
-      status: true,
-      message: "profile updated successfully",
-    });
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.json({ status: false, message: "User not found!" });
+    }
+    await UserCollection.updateOne(
+      { email },
+      {
+        $set: {
+          name,
+          joining_date,
+          profile_pic,
+          phone,
+          education,
+          exp,
+          address,
+        },
+      },
+    );
+    res.json({ status: true, message: "profile updated successfully!" });
   } catch (err) {
-    return res.status(500).json({ status: false, message: err.message });
+    return res.json({ status: false, message: err.message });
   }
 };
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await UserCollection.find();
+    const users = await User.find();
     res.json({ status: true, message: "User Fetched Successfully ", users });
   } catch (err) {
     res.json({ status: false, message: "Cant get users!", users: [] });
@@ -32,7 +50,7 @@ export const getUserById = async (req, res) => {
   const id = req.query.id;
   console.log(id);
   try {
-    const user = await UserCollection.findById(id);
+    const user = await User.findById(id);
     return res.json({
       status: true,
       message: "user fetched successfully!",
@@ -46,7 +64,7 @@ export const getUserById = async (req, res) => {
 export const deleteUser = async (req, res) => {
   const id = req.query.id;
   try {
-    await UserCollection.findByIdAndDelete(id);
+    await User.findByIdAndDelete(id);
     return res.json({
       status: true,
       message: "user Deleted Successfully!",
