@@ -139,7 +139,7 @@ export const changePassword = async (req, res) => {
 
     await AuthCollection.updateOne(
       { email },
-      { $set: { newPassword: hasedpassword } },
+      { $set: { password: hasedpassword } },
     );
 
     res
@@ -161,7 +161,7 @@ export const forgetPassword = async (req, res) => {
   if (!user) {
     return res.status(404).json({ status: false, message: "user not found !" });
   }
-  const isOtpSent = await otpSender(email);
+  const isOtpSent = await sendOTP(email);
   res.json(isOtpSent);
 };
 
