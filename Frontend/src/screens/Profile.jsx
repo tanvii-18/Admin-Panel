@@ -1,5 +1,27 @@
+import { toast } from "sonner";
+import { adminRoutes } from "../utils/apiRoutes";
+import { useState } from "react";
+
 export default function Profile() {
-  // const handle
+  const [currentUser, setCurrentUser] = useState({});
+
+  const getCurrentUser = () => {
+    try {
+    } catch (error) {
+      toast.error(res.data.message);
+    }
+  };
+
+  const handleUpdateProfile = () => {
+    try {
+      const res = `${api / adminRoutes}/update-admin-profile`;
+      console.log(res.data);
+      toast.success("Profile Updated Successfully!");
+    } catch (error) {
+      toast.error(res.data.message);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h2 className="text-2xl font-semibold text-center mb-6">Profile Page</h2>
@@ -93,7 +115,10 @@ export default function Profile() {
 
         {/* Button */}
         <div className="flex justify-center">
-          <button className="bg-gray-800 text-white px-8 py-2 rounded hover:bg-gray-700 transition cursor-pointer">
+          <button
+            className="bg-gray-800 text-white px-8 py-2 rounded hover:bg-gray-700 transition cursor-pointer"
+            onClick={handleUpdateProfile}
+          >
             Update Profile
           </button>
         </div>
