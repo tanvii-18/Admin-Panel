@@ -5,7 +5,7 @@ import {
   getUserById,
   updateAdminProfile,
   updateUserByAdmin,
-} from "../controllers/adminController";
+} from "../controllers/adminController.js";
 
 const admin_Routes = express.Router();
 
