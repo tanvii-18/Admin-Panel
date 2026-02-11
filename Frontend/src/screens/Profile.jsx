@@ -1,12 +1,24 @@
 import { toast } from "sonner";
-import { adminRoutes } from "../utils/apiRoutes";
-import { useState } from "react";
+import { adminRoutes, authRoutes } from "../utils/apiRoutes";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Profile() {
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
   const [currentUser, setCurrentUser] = useState({});
 
-  const getCurrentUser = () => {
+  const getCurrentUser = async () => {
     try {
+      const res = await axios.get(`${authRoutes}/getCurrentUser`, {
+        withCredential: true,
+      });
+
+      if (res.data.status) {
+        setCurrentUser(res.data.user.user);
+      }
     } catch (error) {
       toast.error(res.data.message);
     }
@@ -43,6 +55,7 @@ export default function Profile() {
               type="text"
               disabled
               className="w-full p-2 border rounded bg-gray-100"
+              value={currentUser.email ?? "Email Not Assigned"}
             />
           </div>
 
@@ -51,7 +64,6 @@ export default function Profile() {
             <input type="text" className="w-full p-2 border rounded" />
           </div>
         </div>
-
         {/* Employee ID + Role */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
@@ -66,7 +78,6 @@ export default function Profile() {
             <input type="text" className="w-full p-2 border rounded" />
           </div>
         </div>
-
         {/* Joining Date + Salary */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
@@ -81,7 +92,6 @@ export default function Profile() {
             <input type="number" className="w-full p-2 border rounded" />
           </div>
         </div>
-
         {/* Education + Experience */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
@@ -94,7 +104,6 @@ export default function Profile() {
             <input type="text" className="w-full p-2 border rounded" />
           </div>
         </div>
-
         {/* Department + Phone + Address */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div>
@@ -112,7 +121,6 @@ export default function Profile() {
             <input type="text" className="w-full p-2 border rounded" />
           </div>
         </div>
-
         {/* Button */}
         <div className="flex justify-center">
           <button
