@@ -109,7 +109,7 @@ export const verifyOtp = async (req, res) => {
       message: "OTP is verified & Signin successfully !",
     });
   } catch (error) {
-    // console.log("Catch block", error);
+    console.log("Catch block", error);
 
     return res
       .status(500)

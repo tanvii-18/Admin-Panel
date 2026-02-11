@@ -26,7 +26,7 @@ export default function SignIn() {
       console.log(res.data.message);
 
       toast.success(res.data.message, { id: toastId });
-      navigate("/verify-otp", { state: { email } });
+      navigate("/verify-otp", { state: email });
     } catch (error) {
       toast.dismiss(toastId);
       toast.error(error.response?.data?.message);
