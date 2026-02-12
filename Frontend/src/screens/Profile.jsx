@@ -20,7 +20,8 @@ export default function Profile() {
         setCurrentUser(res.data.user.user);
       }
     } catch (error) {
-      toast.error(res.data.message);
+      console.log(error);
+      toast.error(error.message);
     }
   };
 
@@ -30,7 +31,7 @@ export default function Profile() {
       console.log(res.data);
       toast.success("Profile Updated Successfully!");
     } catch (error) {
-      toast.error(res.data.message);
+      toast.error(error.message);
     }
   };
 

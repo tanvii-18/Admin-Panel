@@ -213,6 +213,7 @@ export const getCurrentUser = async (req, res) => {
       return res.json({ status: false, message: "cant get current user !" });
     }
   } catch (err) {
+    console.log(err.message);
     return res.json({ status: false, message: err.message });
   }
 };
