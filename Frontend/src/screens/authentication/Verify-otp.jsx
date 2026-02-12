@@ -2,7 +2,7 @@ import { OTPInput } from "input-otp";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { toast } from "sonner";
-import { authRoutes } from "../utils/apiRoutes";
+import { authRoutes } from "../../utils/apiRoutes";
 import axios from "axios";
 
 export default function Verify_otp() {

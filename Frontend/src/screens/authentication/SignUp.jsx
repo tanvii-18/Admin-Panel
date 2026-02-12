@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { authRoutes } from "../utils/apiRoutes";
+import { authRoutes } from "../../utils/apiRoutes";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
