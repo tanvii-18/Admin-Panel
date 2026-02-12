@@ -11,19 +11,27 @@ dotenv.config();
 export const signup = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await AuthCollection.findOne({ email });
+    const existingUser = await AuthCollection.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({
+        status: false,
+        message: "User already exists!",
+      });
+    }
 
-    if (user) {
-      return res
-        .status(409)
-        .json({ status: false, message: "User already exists.Please Login!" });
+    const existingHR = await User.findOne({ role: "HR" });
+
+    let role = "Employee";
+
+    if (!existingHR) {
+      role = "HR";
     }
 
     const hashed = await bcrypt.hash(password.toString(), 12);
 
     await AuthCollection.create({ email, password: hashed });
 
-    await User.create({ email });
+    await User.create({ email, role });
 
     res.json({ status: true, message: "User Registered Successfully!" });
   } catch (error) {

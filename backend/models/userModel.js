@@ -5,7 +5,11 @@ const users = mongoose.Schema(
     name: String,
     emp_id: String,
     phone: String,
-    role: String,
+    role: {
+      type: String,
+      enum: ["HR", "Manager", "Employee"],
+      default: "Employee",
+    },
     joining_date: Date,
     salary: Number,
     education: String,

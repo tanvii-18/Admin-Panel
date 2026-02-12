@@ -20,7 +20,7 @@ export const updateAdminProfile = async (req, res) => {
     if (!user) {
       return res.json({ status: false, message: "user not found !" });
     }
-    await UserCollection.updateOne(
+    await User.updateOne(
       { email },
       {
         $set: {

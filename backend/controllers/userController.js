@@ -17,7 +17,7 @@ export const updateProfileByUser = async (req, res) => {
     if (!user) {
       return res.json({ status: false, message: "User not found!" });
     }
-    await UserCollection.updateOne(
+    await User.updateOne(
       { email },
       {
         $set: {
