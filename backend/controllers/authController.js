@@ -217,8 +217,6 @@ export const getCurrentUser = async (req, res) => {
         message: "Current user fetched successfully !",
         user,
       });
-    } else {
-      return res.json({ status: false, message: "cant get current user !" });
     }
   } catch (err) {
     console.log(err.message);

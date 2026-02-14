@@ -1,12 +1,10 @@
 import { Route, Routes } from "react-router";
 import "./index.css";
-import SignIn from "./screens/SignIn";
-import SignUp from "./screens/SignUp";
 import { Toaster } from "sonner";
-import Verify_otp from "./screens/Verify-otp";
 import Dashboard from "./screens/Dashboard";
 import Profile from "./screens/Profile";
 import AddEmployee from "./screens/AddEmployee";
+import SignIn from "./screens/authentication/SignIn";
 
 function App() {
   return (
