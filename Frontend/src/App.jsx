@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router";
 import "./index.css";
 import { Toaster } from "sonner";
-import Dashboard from "./screens/Dashboard";
-import Profile from "./screens/Profile";
+import Dashboard from "./screens/pages/Dashboard";
+import Profile from "./screens/pages/Profile";
 import SignIn from "./screens/authentication/SignIn";
 import SignUp from "./screens/authentication/SignUp";
 import Verify_otp from "./screens/authentication/Verify-otp";

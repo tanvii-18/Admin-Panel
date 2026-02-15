@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { adminRoutes, authRoutes } from "../utils/apiRoutes";
+import { adminRoutes, authRoutes } from "../../utils/apiRoutes";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
