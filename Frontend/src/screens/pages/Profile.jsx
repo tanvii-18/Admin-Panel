@@ -25,111 +25,157 @@ export default function Profile() {
     }
   };
 
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [profile, setProfile] = useState({
+    name: "George Arafat",
+    employeeId: "84739234",
+    role: "Junior Technician",
+    email: currentUser?.email || "hello@george.com",
+    phone: "+33254483540",
+    department: "Technical",
+    joiningDate: "2022-05-12",
+    salary: "5000",
+    education: "Electrical Engineering",
+    experience: "3 Years",
+    address: "729 Luxury House King's Garden",
+  });
+
+  const handleChange = (e) => {
+    setProfile({ ...profile, [e.target.name]: e.target.value });
+  };
+
   const handleUpdateProfile = () => {
-    try {
-      const res = `${api / adminRoutes}/update-admin-profile`;
-      console.log(res.data);
-      toast.success("Profile Updated Successfully!");
-    } catch (error) {
-      toast.error(error.message);
-    }
+    console.log("Updated Data:", profile);
+    setIsEditing(false);
+    alert("Profile Updated Successfully ✅");
   };
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h2 className="text-2xl font-semibold text-center mb-6">Profile Page</h2>
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+        {/* LEFT PROFILE CARD */}
+        <div className="bg-white rounded-2xl shadow p-6">
+          <div className="flex flex-col items-center">
+            <div className="h-32 w-32 rounded-full bg-gray-300 mb-4 flex items-center justify-center text-gray-600">
+              Profile
+            </div>
 
-      {/* Profile Image */}
-      <div className="flex justify-center mb-8 cursor-pointer">
-        <div className="h-40 w-40 rounded-full bg-gray-300 flex items-center justify-center">
-          <span className="text-gray-600 text-sm">Profile Photo</span>
-        </div>
-      </div>
+            {isEditing ? (
+              <input
+                name="name"
+                value={profile.name}
+                onChange={handleChange}
+                className="text-xl font-semibold text-center border rounded px-2 py-1"
+              />
+            ) : (
+              <h2 className="text-xl font-semibold">{profile.name}</h2>
+            )}
 
-      {/* Form Container */}
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow">
-        {/* Email + Name */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
-            <input
-              type="text"
-              disabled
-              className="w-full p-2 border rounded bg-gray-100"
-              value={currentUser.email ?? "Email Not Assigned"}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1">Name</label>
-            <input type="text" className="w-full p-2 border rounded" />
-          </div>
-        </div>
-        {/* Employee ID + Role */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Employee ID
-            </label>
-            <input type="text" className="w-full p-2 border rounded" />
+            <p className="text-sm text-blue-500 mt-1">{profile.role}</p>
+            <p className="text-gray-500 text-sm mt-1">
+              ID: {profile.employeeId}
+            </p>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium mb-1">Role</label>
-            <input type="text" className="w-full p-2 border rounded" />
-          </div>
-        </div>
-        {/* Joining Date + Salary */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Joining Date
-            </label>
-            <input type="text" className="w-full p-2 border rounded" />
-          </div>
+          <div className="mt-6 space-y-3 text-sm">
+            <div>
+              <span className="font-medium">Email:</span>
+              <p>{profile.email}</p>
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium mb-1">Salary</label>
-            <input type="number" className="w-full p-2 border rounded" />
-          </div>
-        </div>
-        {/* Education + Experience */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Education</label>
-            <input type="text" className="w-full p-2 border rounded" />
-          </div>
+            <div>
+              <span className="font-medium">Phone:</span>
+              {isEditing ? (
+                <input
+                  name="phone"
+                  value={profile.phone}
+                  onChange={handleChange}
+                  className="w-full border rounded px-2 py-1 mt-1"
+                />
+              ) : (
+                <p>{profile.phone}</p>
+              )}
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium mb-1">Experience</label>
-            <input type="text" className="w-full p-2 border rounded" />
+            <div>
+              <span className="font-medium">Department:</span>
+              {isEditing ? (
+                <input
+                  name="department"
+                  value={profile.department}
+                  onChange={handleChange}
+                  className="w-full border rounded px-2 py-1 mt-1"
+                />
+              ) : (
+                <p>{profile.department}</p>
+              )}
+            </div>
           </div>
         </div>
-        {/* Department + Phone + Address */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div>
-            <label className="block text-sm font-medium mb-1">Department</label>
-            <input type="text" className="w-full p-2 border rounded" />
+
+        {/* RIGHT SECTION */}
+        <div className="md:col-span-2 space-y-6">
+          {/* PROFESSIONAL INFO */}
+          <div className="bg-white rounded-2xl shadow p-6">
+            <h3 className="text-lg font-semibold mb-4">
+              Professional Information
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              {[
+                { label: "Joining Date", name: "joiningDate" },
+                { label: "Salary", name: "salary" },
+                { label: "Education", name: "education" },
+                { label: "Experience", name: "experience" },
+                { label: "Address", name: "address" },
+              ].map((item) => (
+                <div key={item.name}>
+                  <label className="text-sm font-medium">{item.label}</label>
+
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name={item.name}
+                      value={profile[item.name]}
+                      onChange={handleChange}
+                      className="w-full mt-1 border rounded px-2 py-1"
+                    />
+                  ) : (
+                    <p className="mt-1 text-gray-600">{profile[item.name]}</p>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium mb-1">Phone</label>
-            <input type="text" className="w-full p-2 border rounded" />
-          </div>
+          {/* ACTION BUTTONS */}
+          <div className="flex justify-end gap-4">
+            {isEditing ? (
+              <>
+                <button
+                  onClick={() => setIsEditing(false)}
+                  className="px-6 py-2 bg-gray-300 rounded-lg"
+                >
+                  Cancel
+                </button>
 
-          <div>
-            <label className="block text-sm font-medium mb-1">Address</label>
-            <input type="text" className="w-full p-2 border rounded" />
+                <button
+                  onClick={handleUpdateProfile}
+                  className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700"
+                >
+                  Update Profile
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={() => setIsEditing(true)}
+                className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700"
+              >
+                Edit Profile
+              </button>
+            )}
           </div>
-        </div>
-        {/* Button */}
-        <div className="flex justify-center">
-          <button
-            className="bg-gray-800 text-white px-8 py-2 rounded hover:bg-gray-700 transition cursor-pointer"
-            onClick={handleUpdateProfile}
-          >
-            Update Profile
-          </button>
         </div>
       </div>
     </div>

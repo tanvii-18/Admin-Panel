@@ -2,7 +2,7 @@ import Sidebar_dashboard from "./Sidebar-dashboard";
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen flex bg-blue-100 ">
+    <div className="min-h-screen flex bg-gray-100 ">
       <Sidebar_dashboard />
 
       {/* Main Content */}
