@@ -30,6 +30,7 @@ export default function SignUp() {
     } catch (error) {
       toast.dismiss(toastId);
       toast.error(error.response?.data?.message);
+      Navigate("/signin");
     } finally {
       setIsLoading(false);
     }

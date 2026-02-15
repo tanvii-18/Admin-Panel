@@ -19,21 +19,30 @@ export const signup = async (req, res) => {
       });
     }
 
-    const existingHR = await User.findOne({ role: "HR" });
+    const existingHR = await User.findOne({ role: "Admin" });
 
     let role = "Employee";
 
     if (!existingHR) {
-      role = "HR";
+      role = "Admin";
     }
 
     const hashed = await bcrypt.hash(password.toString(), 12);
 
     await AuthCollection.create({ email, password: hashed });
 
-    await User.create({ email, role });
-
-    res.json({ status: true, message: "User Registered Successfully!" });
+    if (role === "HR") {
+      await User.create({ email, role });
+      res.json({
+        status: true,
+        message: "Admin account created successfully.!",
+      });
+    } else {
+      res.status(400).json({
+        status: false,
+        message: "Only Admin or HR can register. Please sign in.!",
+      });
+    }
   } catch (error) {
     return res.json({
       status: false,

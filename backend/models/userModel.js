@@ -7,7 +7,7 @@ const users = mongoose.Schema(
     phone: String,
     role: {
       type: String,
-      enum: ["HR", "Manager", "Employee"],
+      enum: ["Admin", "Manager", "Employee"],
       default: "Employee",
     },
     joining_date: Date,
