@@ -44,7 +44,7 @@ export default function SignUp() {
             <span className="text-[1px] text-gray-500">
               Already have account?{" "}
               <Link
-                to="/"
+                to="/signin"
                 className="text-blue-700 hover:underline duration-100"
               >
                 Sign in

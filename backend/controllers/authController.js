@@ -76,7 +76,7 @@ export const loginUser = async (req, res) => {
 
     res
       .status(200)
-      .json({ status: true, message: "OTP Send Successfully!", otp });
+      .json({ status: true, message: "OTP Send Successfully!", otp, user });
   } catch (error) {
     return res.json({ status: false, message: error.message });
   }

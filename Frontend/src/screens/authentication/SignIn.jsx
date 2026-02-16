@@ -26,7 +26,7 @@ export default function SignIn() {
       console.log(res.data.message);
 
       toast.success(res.data.message, { id: toastId });
-      navigate("/verify-otp", { state: email });
+      navigate("/verify-otp", { state: email }, user);
     } catch (error) {
       toast.dismiss(toastId);
       toast.error(error.response?.data?.message);
@@ -44,10 +44,7 @@ export default function SignIn() {
           </h1>
           <span className="text-[1px] text-gray-500">
             Don't have account?{" "}
-            <Link
-              to="/signup"
-              className="text-blue-700 hover:underline duration-100"
-            >
+            <Link to="/" className="text-blue-700 hover:underline duration-100">
               Sign Up
             </Link>
           </span>

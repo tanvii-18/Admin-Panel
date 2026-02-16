@@ -2,7 +2,7 @@ import { OTPInput } from "input-otp";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { toast } from "sonner";
-import { authRoutes } from "../../utils/apiRoutes";
+import { adminRoutes, authRoutes } from "../../utils/apiRoutes";
 import axios from "axios";
 
 export default function Verify_otp() {
@@ -20,6 +20,7 @@ export default function Verify_otp() {
         },
       );
 
+      console.log(res.data);
       if (res.data.message) {
         navigate("/dashboard");
       }
@@ -27,6 +28,15 @@ export default function Verify_otp() {
       toast.error(error.message);
     }
   };
+
+  // const getCurrentUser = async () => {
+  //   try {
+  //     const res = await axios.get(`${authRoutes}/signin`, user);
+  //     console.log(res.data.user);
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
+  // };
 
   return (
     <div className="min-h-screen flex justify-center items-center">

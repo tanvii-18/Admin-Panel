@@ -44,24 +44,30 @@ export default function AllEmployees() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 p-4">
       {/* HEADER */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
         <div>
           <h2 className="text-2xl font-semibold">
             Employees ({employees.length})
           </h2>
-          <p className="text-gray-500 text-sm">
-            All the employees of the company are listed here
-          </p>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           <button
             onClick={() => navigate("/add-employee")}
-            className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700"
+            className="flex items-center gap-3  border-2 border-gray-800 text-gray-800 py-3 px-4 rounded-2xl hover:bg-gray-700 text-[14px] hover:text-white cursor-pointer duration-200"
           >
-            <Plus size={16} />
+            <svg
+              height="20"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 256 256"
+              fill="#424242"
+              hover="#fffff"
+            >
+              <path d="M256,136a8,8,0,0,1-8,8H232v16a8,8,0,0,1-16,0V144H200a8,8,0,0,1,0-16h16V112a8,8,0,0,1,16,0v16h16A8,8,0,0,1,256,136Zm-57.87,58.85a8,8,0,0,1-12.26,10.3C165.75,181.19,138.09,168,108,168s-57.75,13.19-77.87,37.15a8,8,0,0,1-12.25-10.3c14.94-17.78,33.52-30.41,54.17-37.17a68,68,0,1,1,71.9,0C164.6,164.44,183.18,177.07,198.13,194.85ZM108,152a52,52,0,1,0-52-52A52.06,52.06,0,0,0,108,152Z" />
+            </svg>
             Add New Employee
           </button>
         </div>
@@ -69,7 +75,7 @@ export default function AllEmployees() {
 
       {/* SEARCH */}
       <div className="flex items-center gap-3 mb-6">
-        <div className="flex items-center bg-white border rounded-lg px-3 py-2 w-full md:w-96">
+        <div className="flex items-center bg-white border-[1px] border-gray-800 rounded-4xl px-3 py-2 w-full md:w-96">
           <Search size={16} className="text-gray-400" />
           <input
             type="text"
