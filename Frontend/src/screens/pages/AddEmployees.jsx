@@ -22,7 +22,6 @@ export default function AddEmployees() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -40,7 +39,6 @@ export default function AddEmployees() {
 
       if (res.data.status) {
         toast.success("Employee added successfully");
-
         setFormData({
           name: "",
           email: "",
@@ -65,49 +63,58 @@ export default function AddEmployees() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-4xl mx-auto bg-white shadow rounded-2xl p-8">
-        <h2 className="text-2xl font-semibold mb-6">Add Employee</h2>
+    <div className="min-h-screen bg-white px-4 py-6">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-3xl font-semibold text-gray-800 mb-2">
+          Add New Employee
+        </h2>
+        <p className="text-gray-500 mb-8">
+          Fill in the details below to create a new employee profile.
+        </p>
 
-        <form onSubmit={handleSubmit}>
-          <div className="grid md:grid-cols-2 gap-4">
-            {[
-              { label: "Name", name: "name" },
-              { label: "Email", name: "email" },
-              { label: "Phone", name: "phone" },
-              { label: "Employee ID", name: "emp_id" },
-              { label: "Department", name: "department" },
-              { label: "Joining Date", name: "joining_date", type: "date" },
-              { label: "Salary", name: "salary" },
-              { label: "Education", name: "education" },
-              { label: "Experience", name: "experience" },
-              { label: "Address", name: "address" },
-            ].map((field) => (
-              <div key={field.name}>
-                <label className="text-sm font-medium">{field.label}</label>
+        <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-10">
+          <form onSubmit={handleSubmit}>
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                { label: "Full Name", name: "name" },
+                { label: "Email", name: "email" },
+                { label: "Phone", name: "phone" },
+                { label: "Employee ID", name: "emp_id" },
+                { label: "Department", name: "department" },
+                { label: "Joining Date", name: "joining_date", type: "date" },
+                { label: "Salary", name: "salary" },
+                { label: "Education", name: "education" },
+                { label: "Experience", name: "experience" },
+                { label: "Address", name: "address" },
+              ].map((field) => (
+                <div key={field.name}>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {field.label}
+                  </label>
 
-                <input
-                  type={field.type || "text"}
-                  name={field.name}
-                  value={formData[field.name]}
-                  onChange={handleChange}
-                  required
-                  className="w-full mt-1 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-800"
-                />
-              </div>
-            ))}
-          </div>
+                  <input
+                    type={field.type || "text"}
+                    name={field.name}
+                    value={formData[field.name]}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition"
+                  />
+                </div>
+              ))}
+            </div>
 
-          <div className="flex justify-end mt-6">
-            <button
-              type="submit"
-              disabled={loading}
-              className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700"
-            >
-              {loading ? "Adding..." : "Add Employee"}
-            </button>
-          </div>
-        </form>
+            <div className="flex justify-end mt-10">
+              <button
+                type="submit"
+                disabled={loading}
+                className="px-8 py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition shadow-sm cursor-pointer"
+              >
+                {loading ? "Adding..." : "Add Employee"}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
