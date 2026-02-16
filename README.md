@@ -37,76 +37,17 @@ Secure data serving with CORS enabled.
 
 Fully tested with Postman and Thunder Client.
 
-## 📂 Folder Structure
-
-Admin-Panel/
-├── frontend/
-│   ├── node_modules/             # Dependencies
-│   ├── public/                   # Static assets (index.html, favicon)
-│   ├── src/                      # Source code
-│   │   ├── assets/               # Images, icons, etc.
-│   │   ├── screens/
-│   │   │   └── authentication/
-│   │   │       ├── SignIn.jsx
-│   │   │       ├── SignUp.jsx
-│   │   │       └── Verify-otp.jsx
-│   │   ├── pages/
-│   │   │   ├── AllEmployees.jsx
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── Profile.jsx
-│   │   │   └── Sidebar-dashboard.jsx
-│   │   ├── utils/
-│   │   │   ├── apiRoutes.js
-│   │   │   └── App.jsx
-│   │   ├── index.css
-│   │   └── main.jsx
-│   ├── .gitignore
-│   ├── eslint.config.js
-│   ├── index.html
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── README.md
-│   └── vite.config.js
-│
-├── backend/
-│   ├── config/                   # Config files (DB connections)
-│   ├── controllers/
-│   │   ├── AdminController.js
-│   │   ├── authController.js
-│   │   ├── dashBoardController.js
-│   │   └── UserController.js
-│   ├── middleware/
-│   │   └── authMiddleware.js
-│   ├── models/
-│   │   ├── authModel.js
-│   │   ├── dashboardModel.js
-│   │   ├── otpModel.js
-│   │   └── UserModel.js
-│   ├── node_modules/
-│   ├── routes/
-│   │   ├── AdminRoutes.js
-│   │   ├── authRoutes.js
-│   │   └── userRoutes.js
-│   ├── services/                 # Additional services (if any)
-│   ├── utils/                    # Utilities/helpers
-│   ├── .env
-│   ├── .gitignore
-│   ├── notes.txt
-│   ├── package-lock.json
-│   ├── package.json
-│   └── server.js
-│
-└── screenshots/                  # Project screenshots
-    ├── dashboard.png
-    └── users.png
-
 ## 🖼 UI Screenshot
+
+<img width="1894" height="821" alt="Screenshot 2026-02-16 091154" src="https://github.com/user-attachments/assets/e7dc40f5-ccb8-4587-a853-8f8593934e96" />
+
 
 ### 🚀 How to Run
 
-Clone the repository:
+#### Clone the repository:
 
 git clone https://github.com/tanvii-18/Admin-Panel
+
 cd Admin-Panel
 
 ### Frontend:
