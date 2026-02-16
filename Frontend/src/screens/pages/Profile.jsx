@@ -21,7 +21,6 @@ export default function Profile() {
 
       if (res.data.status && res.data.user) {
         const updatedUser = res.data.user;
-
         setCurrentUser(updatedUser);
         setProfile({ ...updatedUser });
         setIsEditing(false);
@@ -45,10 +44,13 @@ export default function Profile() {
     e.preventDefault();
     setLoading(true);
 
+    console.log(profile);
+
     try {
       const res = await axios.put(
         `${adminRoutes}/update-admin-profile`,
         {
+          _id: profile._id,
           name: profile.name,
           phone: profile.phone,
           department: profile.department,
@@ -62,10 +64,12 @@ export default function Profile() {
       if (res.data.status) {
         toast.success("Profile updated successfully");
 
-        const updatedUser = res.data.user;
-
-        setCurrentUser(updatedUser);
-        setProfile({ ...updatedUser });
+        if (res.data.user) {
+          setCurrentUser(res.data.user);
+          setProfile({ ...res.data.user });
+        } else {
+          getCurrentUser();
+        }
 
         setIsEditing(false);
       } else {
@@ -93,7 +97,7 @@ export default function Profile() {
             {isEditing ? (
               <input
                 name="name"
-                value={profile.name || ""}
+                value={profile.name || "Tanvi Patel"}
                 onChange={handleChange}
                 className="text-xl font-semibold text-center border rounded px-2 py-1"
               />
@@ -103,7 +107,7 @@ export default function Profile() {
 
             <p className="text-sm text-blue-500 mt-1">{profile.role}</p>
             <p className="text-gray-500 text-sm mt-1">
-              ID: {profile.employeeId}
+              ID: {profile.employeeId || profile.emp_id}
             </p>
           </div>
         </div>

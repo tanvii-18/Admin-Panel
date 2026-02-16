@@ -53,7 +53,7 @@ export default function AllEmployees() {
           </h2>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 hover:text-white">
           <button
             onClick={() => navigate("/add-employee")}
             className="flex items-center gap-3  border-2 border-gray-800 text-gray-800 py-3 px-4 rounded-2xl hover:bg-gray-700 text-[14px] hover:text-white cursor-pointer duration-200"
@@ -96,7 +96,7 @@ export default function AllEmployees() {
           >
             {/* Profile */}
             <div className="flex items-center gap-4 mb-4">
-              <div className="h-12 w-12 rounded-full bg-gray-300" />
+              <div className="h-12 w-12 rounded-full bg-gray-300"></div>
               <div>
                 <h3 className="font-semibold">{emp.name}</h3>
                 <p className="text-sm text-gray-500">{emp.role}</p>
@@ -108,15 +108,12 @@ export default function AllEmployees() {
               <span className="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded">
                 {emp.department}
               </span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                {emp.type}
-              </span>
             </div>
 
             {/* Details */}
             <div className="text-sm text-gray-600 space-y-1">
               <p>
-                <span className="font-medium">Emp Code:</span> {emp.empCode}
+                <span className="font-medium">Emp Id:</span> {emp._id}
               </p>
               <p>
                 <span className="font-medium">Joining Date:</span>{" "}

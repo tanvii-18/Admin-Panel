@@ -2,7 +2,7 @@ import { User } from "../models/userModel.js";
 
 export const updateAdminProfile = async (req, res) => {
   const {
-    email,
+    _id,
     name,
     role,
     emp_id,
@@ -12,16 +12,17 @@ export const updateAdminProfile = async (req, res) => {
     profile_pic,
     phone,
     education,
-    exp,
+    experience,
     address,
   } = req.body;
+
+  if (!_id) {
+    return res.json({ status: false, message: "User ID is required!" });
+  }
+
   try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.json({ status: false, message: "user not found !" });
-    }
-    await User.updateOne(
-      { email },
+    const updatedUser = await User.findByIdAndUpdate(
+      _id,
       {
         $set: {
           name,
@@ -33,30 +34,44 @@ export const updateAdminProfile = async (req, res) => {
           profile_pic,
           phone,
           education,
-          exp,
+          experience,
           address,
         },
       },
+      { new: true },
     );
-    res.json({ status: true, message: "profile updated successfully !!" });
+
+    if (!updatedUser) {
+      return res.json({ status: false, message: "User not found!" });
+    }
+
+    res.json({
+      status: true,
+      message: "Profile updated successfully!",
+      user: updatedUser,
+    });
   } catch (err) {
-    return res.json({ status: false, message: err.message, user: updatedUser });
+    return res.json({ status: false, message: err.message });
   }
 };
 
-// user updated by admin
 export const updateUserByAdmin = async (req, res) => {
-  const { email } = req.body;
-
   try {
-    await User.findByIdAndUpdate(
-      { email },
-      {
-        $set: req.body,
-      },
+    const updatedUser = await User.findOneAndUpdate(
+      { email: req.body.email },
+      { $set: req.body },
+      { new: true },
     );
 
-    res.json({ status: true, message: "User profile updated successfully!" });
+    if (!updatedUser) {
+      return res.json({ status: false, message: "User not found!" });
+    }
+
+    res.json({
+      status: true,
+      message: "User profile updated successfully!",
+      user: updatedUser,
+    });
   } catch (err) {
     res.json({ status: false, message: err.message });
   }
@@ -65,37 +80,29 @@ export const updateUserByAdmin = async (req, res) => {
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-    res.json({ status: true, message: "User Fetched Successfully ", users });
+    res.json({ status: true, message: "Users fetched successfully", users });
   } catch (err) {
-    res.json({ status: false, message: "Cant get users!", users: [] });
+    res.json({ status: false, message: "Can't get users!", users: [] });
   }
 };
 
 export const getUserById = async (req, res) => {
-  const id = req.query.id;
-  console.log(id);
+  const { id } = req.query;
   try {
     const user = await User.findById(id);
-    return res.json({
-      status: true,
-      message: "user fetched successfully!",
-      user,
-    });
+    if (!user) return res.json({ status: false, message: "User not found" });
+    res.json({ status: true, message: "User fetched successfully!", user });
   } catch (err) {
-    return res.json({ status: false, message: err.message });
+    res.json({ status: false, message: err.message });
   }
 };
 
 export const deleteUser = async (req, res) => {
-  const id = req.query.id;
+  const { id } = req.query;
   try {
     await User.findByIdAndDelete(id);
-    return res.json({
-      status: true,
-      message: "user Deleted Successfully!",
-    });
+    res.json({ status: true, message: "User deleted successfully!" });
   } catch (err) {
-    console.log(err.message);
-    return res.json({ status: false, message: err.message });
+    res.json({ status: false, message: err.message });
   }
 };

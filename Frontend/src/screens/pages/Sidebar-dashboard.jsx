@@ -84,7 +84,7 @@ export default function Sidebar_dashboard() {
               </Link>
 
               <Link
-                to="/attendance"
+                to="/employees-attendance"
                 className="flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-200 hover:bg-white hover:scale-105"
               >
                 <svg
