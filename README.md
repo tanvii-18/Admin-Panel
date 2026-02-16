@@ -32,6 +32,7 @@ The project is organized into frontend and backend directories for modularity an
 Frontend Folder Structure
 FRONTEND
 ├── node_modules/ # Dependencies (npm installs)
+
 ├── public/ # Static assets
 │ └── ... # (e.g., index.html, favicon)
 ├── src/ # Source code
