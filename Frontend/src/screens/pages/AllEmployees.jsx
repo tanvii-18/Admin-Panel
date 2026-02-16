@@ -55,7 +55,7 @@ export default function AllEmployees() {
 
         <div className="flex gap-2 hover:text-white">
           <button
-            onClick={() => navigate("/add-employee")}
+            onClick={() => navigate("/add-employees")}
             className="flex items-center gap-3  border-2 border-gray-800 text-gray-800 py-3 px-4 rounded-2xl hover:bg-gray-700 text-[14px] hover:text-white cursor-pointer duration-200"
           >
             <svg

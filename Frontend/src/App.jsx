@@ -8,6 +8,7 @@ import SignUp from "./screens/authentication/SignUp";
 import Verify_otp from "./screens/authentication/Verify-otp";
 import AllEmployees from "./screens/pages/AllEmployees";
 import { Attendance } from "./screens/pages/Attendance";
+import AddEmployees from "./screens/pages/AddEmployees";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/employees" element={<AllEmployees />} />
         <Route path="/employees-attendance" element={<Attendance />} />
+        <Route path="/add-employees" element={<AddEmployees />} />
       </Routes>
     </>
   );
