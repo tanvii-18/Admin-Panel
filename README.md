@@ -30,18 +30,17 @@ FrontendBackendDatabaseToolsReactNode.jsMongoDB AtlasPostmanTailwind CSSExpress.
 The project is organized into frontend and backend directories for modularity and scalability.
 
 Frontend Folder Structure
-FRONTEND
+frontend/
 ├── node_modules/ # Dependencies (npm installs)
-
 ├── public/ # Static assets
-│ └── ... # (e.g., index.html, favicon)
+│ └── ... # index.html, favicon, etc.
 ├── src/ # Source code
 │ ├── assets/ # Images, icons, etc.
 │ ├── screens/ # Authentication screens
-│ │ ├── authentication/
-│ │ │ ├── SignIn.jsx # Login page
-│ │ │ ├── SignUp.jsx # Registration page
-│ │ │ └── Verify-otp.jsx # OTP verification
+│ │ └── authentication/
+│ │ ├── SignIn.jsx # Login page
+│ │ ├── SignUp.jsx # Registration page
+│ │ └── Verify-otp.jsx# OTP verification
 │ ├── pages/ # Main app pages
 │ │ ├── AllEmployees.jsx # Employee list
 │ │ ├── Dashboard.jsx # Main dashboard
