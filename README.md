@@ -1,7 +1,6 @@
 # 🚀 Admin Panel – Full Stack MERN Dashboard
 
-A modern and scalable Admin Panel built using the MERN stack (MongoDB, Express, React, Node.js).
-This project provides role-based authentication, employee management, attendance tracking, and dashboard analytics in a clean and responsive interface.
+This Admin Panel is a scalable MERN stack application designed for managing users, employees, and attendance efficiently. It implements secure JWT authentication, role-based access control, and a clean, modern dashboard interface for streamlined administration.
 
 ## 🛠 Tech Stack
 
@@ -51,7 +50,15 @@ This project provides role-based authentication, employee management, attendance
 
 ## UI Preview ✨
 
-<img width="1892" height="820" alt="Screenshot 2026-02-16 234041" src="https://github.com/user-attachments/assets/6f97411d-3222-43f6-8296-d66fe4df8c1e" />
+<p align="center">
+  <a href="">
+  <img width="49%" alt="Screenshot 2026-02-16 235729" src="https://github.com/user-attachments/assets/2f503365-01d1-4fc4-86d9-b89b0036586c" />
+  </a>
+  <a href="">
+    <img width="49%" alt="Screenshot 2026-02-16 234041" src="https://github.com/user-attachments/assets/f7320886-d77e-4b24-b677-50085851a4ea" />
+  </a>
+</p>
+
 
 
 ## 📁 Project Structure
