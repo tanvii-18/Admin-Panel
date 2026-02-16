@@ -1,72 +1,113 @@
-# Admin Panel – Fullstack MERN Dashboard
+# 🚀 Admin Panel – Full Stack MERN Dashboard
 
-A modern Admin Panel built with React and Tailwind CSS for the frontend, and Node.js, Express, and MongoDB for the backend. It provides tools for managing users, employees, and statistics in a single interface. All endpoints have been tested with Postman and Thunder Client.
+A modern and scalable Admin Panel built using the MERN stack (MongoDB, Express, React, Node.js).
+This project provides role-based authentication, employee management, attendance tracking, and dashboard analytics in a clean and responsive interface.
 
 ## 🛠 Tech Stack
 
-Frontend: React, Tailwind CSS, React Hooks
-Backend: Node.js, Express.js, Mongoose
-Database: MongoDB Atlas
-Tools: Postman, Thunder Client, JWT Auth, CORS
+<p align="center">
 
-## ✨ Features
+<a href="https://react.dev/">
+  <img src="https://img.shields.io/badge/React-0D1117?style=for-the-badge&logo=react&logoColor=61DAFB" />
+</a>
 
-Frontend (React + Tailwind CSS):
+<a href="https://reactrouter.com/">
+  <img src="https://img.shields.io/badge/React_Router-0D1117?style=for-the-badge&logo=reactrouter&logoColor=CA4245" />
+</a>
 
-Responsive UI with interactive dashboard cards displaying statistics such as Total Employees, New Hires, Attendance, Earnings, and Tasks.
+<a href="https://tailwindcss.com/">
+  <img src="https://img.shields.io/badge/TailwindCSS-0D1117?style=for-the-badge&logo=tailwind-css&logoColor=38BDF8" />
+</a>
 
-Easy profile updates and user management.
+<a href="https://nodejs.org/">
+  <img src="https://img.shields.io/badge/Node.js-0D1117?style=for-the-badge&logo=node.js&logoColor=3C873A" />
+</a>
 
-Backend (Node.js + Express + MongoDB Atlas):
+<a href="https://expressjs.com/">
+  <img src="https://img.shields.io/badge/Express-0D1117?style=for-the-badge&logo=express&logoColor=white" />
+</a>
 
-Manages CRUD operations and business logic.
+<a href="https://www.mongodb.com/">
+  <img src="https://img.shields.io/badge/MongoDB-0D1117?style=for-the-badge&logo=mongodb&logoColor=47A248" />
+</a>
 
-Supports user updates, OTP verification, secure sign-up, and sign-in.
+<a href="https://mongoosejs.com/">
+  <img src="https://img.shields.io/badge/Mongoose-0D1117?style=for-the-badge&logo=mongoose&logoColor=880000" />
+</a>
 
-Authentication & Security:
+<a href="https://jwt.io/">
+  <img src="https://img.shields.io/badge/JWT-0D1117?style=for-the-badge&logo=jsonwebtokens&logoColor=white" />
+</a>
 
-OTP verification and JWT authentication.
+<a href="https://www.mongodb.com/atlas">
+  <img src="https://img.shields.io/badge/MongoDB_Atlas-0D1117?style=for-the-badge&logo=mongodb&logoColor=00ED64" />
+</a>
 
-Admin-controlled user management.
+<a href="https://www.postman.com/">
+  <img src="https://img.shields.io/badge/Postman-0D1117?style=for-the-badge&logo=postman&logoColor=FF6C37" />
+</a>
 
-API & CORS:
+</p>
 
-Secure data serving with CORS enabled.
+## UI Preview ✨
 
-### Testing:
-
-Fully tested with Postman and Thunder Client.
-
-## 🖼 UI Screenshot
-
-<img width="1894" height="821" alt="Screenshot 2026-02-16 091154" src="https://github.com/user-attachments/assets/e7dc40f5-ccb8-4587-a853-8f8593934e96" />
-
-
-### 🚀 How to Run
-
-#### Clone the repository:
-
-git clone https://github.com/tanvii-18/Admin-Panel
-
-cd Admin-Panel
-
-### Frontend:
-
-cd frontend
-
-npm install
-
-npm start
-
-### Backend:
-
-cd backend
-
-npm install
-
-nodemon server.js
+<img width="1892" height="820" alt="Screenshot 2026-02-16 234041" src="https://github.com/user-attachments/assets/6f97411d-3222-43f6-8296-d66fe4df8c1e" />
 
 
-Add your MongoDB Atlas URI to the .env file in the backend directory.
+## 📁 Project Structure
 
-Test API endpoints using Postman or Thunder Client.
+```
+admin-panel/
+│
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── middleware/
+│   │   ├── utils/
+│   │   ├── app.js
+│   │   └── server.js
+│   ├── package.json
+│   └── .env
+│
+├── frontend/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── routes/
+│   │   ├── context/
+│   │   ├── utils/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   └── tailwind.config.js
+```
+
+## 🔥 Features
+
+Secure JWT Authentication
+
+Role-Based Access (Admin / Employee)
+
+Add / Edit / Delete Employees
+
+Attendance Management
+
+Dashboard Analytics Cards
+
+Protected Routes
+
+Responsive UI
+
+## 🔐 Authentication Flow
+
+User logs in
+
+Server generates JWT token
+
+Token stored in HTTP-only cookie
+
+Protected routes verified via middleware
