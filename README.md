@@ -29,69 +29,66 @@ FrontendBackendDatabaseToolsReactNode.jsMongoDB AtlasPostmanTailwind CSSExpress.
 
 The project is organized into frontend and backend directories for modularity and scalability.
 
-Frontend Folder Structure
-frontend/
-├── node_modules/ # Dependencies (npm installs)
-├── public/ # Static assets
-│ └── ... # index.html, favicon, etc.
-├── src/ # Source code
-│ ├── assets/ # Images, icons, etc.
-│ ├── screens/ # Authentication screens
-│ │ └── authentication/
-│ │ ├── SignIn.jsx # Login page
-│ │ ├── SignUp.jsx # Registration page
-│ │ └── Verify-otp.jsx# OTP verification
-│ ├── pages/ # Main app pages
-│ │ ├── AllEmployees.jsx # Employee list
-│ │ ├── Dashboard.jsx # Main dashboard
-│ │ ├── Profile.jsx # User profile
-│ │ └── Sidebar-dashboard.jsx # Sidebar component
-│ ├── utils/ # Utilities
-│ │ ├── apiRoutes.js # API endpoint definitions
-│ │ └── App.jsx # Root app component
-│ ├── index.css # Global styles
-│ ├── main.jsx # Entry point
-│ └── ... # Other components/hooks
-├── .gitignore # Git ignore file
-├── eslint.config.js # ESLint config
-├── index.html # HTML template
-├── package-lock.json # Lockfile
-├── package.json # Project metadata
-├── README.md # Frontend docs
-└── vite.config.js # Vite build config
-
-## Backend Folder Structure
-
-BACKEND
-├── config/ # Config files
-│ └── ... # (e.g., db connections)
-├── controllers/ # Business logic handlers
-│ ├── AdminController.js # Admin ops
-│ ├── authController.js # Auth endpoints
-│ ├── dashBoardController.js # Dashboard data
-│ └── UserController.js # User management
-├── middleware/ # Middleware functions
-│ └── authMiddleware.js # Auth checks
-├── models/ # MongoDB schemas
-│ ├── authModel.js # Auth model
-│ ├── dashboardModel.js # Dashboard model
-│ ├── otpModel.js # OTP model
-│ └── UserModel.js # User model
-├── node_modules/ # Dependencies
-├── routes/ # API routes
-│ ├── AdminRoutes.js # Admin routes
-│ ├── authRoutes.js # Auth routes
-│ └── userRoutes.js # User routes
-├── services/ # Additional services
-│ └── ... # (if any)
-├── utils/ # Utilities
-│ └── ... # (e.g., helpers)
-├── .env # Environment variables
-├── .gitignore # Git ignore file
-├── notes.txt # Dev notes
-├── package-lock.json # Lockfile
-├── package.json # Project metadata
-└── server.js # Server entry point
+Admin-Panel/
+├── frontend/
+│ ├── node_modules/ # Dependencies
+│ ├── public/ # Static assets (index.html, favicon)
+│ ├── src/ # Source code
+│ │ ├── assets/ # Images, icons, etc.
+│ │ ├── screens/
+│ │ │ └── authentication/
+│ │ │ ├── SignIn.jsx
+│ │ │ ├── SignUp.jsx
+│ │ │ └── Verify-otp.jsx
+│ │ ├── pages/
+│ │ │ ├── AllEmployees.jsx
+│ │ │ ├── Dashboard.jsx
+│ │ │ ├── Profile.jsx
+│ │ │ └── Sidebar-dashboard.jsx
+│ │ ├── utils/
+│ │ │ ├── apiRoutes.js
+│ │ │ └── App.jsx
+│ │ ├── index.css
+│ │ └── main.jsx
+│ ├── .gitignore
+│ ├── eslint.config.js
+│ ├── index.html
+│ ├── package-lock.json
+│ ├── package.json
+│ ├── README.md
+│ └── vite.config.js
+│
+├── backend/
+│ ├── config/ # Config files (DB connections)
+│ ├── controllers/
+│ │ ├── AdminController.js
+│ │ ├── authController.js
+│ │ ├── dashBoardController.js
+│ │ └── UserController.js
+│ ├── middleware/
+│ │ └── authMiddleware.js
+│ ├── models/
+│ │ ├── authModel.js
+│ │ ├── dashboardModel.js
+│ │ ├── otpModel.js
+│ │ └── UserModel.js
+│ ├── node_modules/
+│ ├── routes/
+│ │ ├── AdminRoutes.js
+│ │ ├── authRoutes.js
+│ │ └── userRoutes.js
+│ ├── services/ # Additional services (if any)
+│ ├── utils/ # Utilities/helpers
+│ ├── .env
+│ ├── .gitignore
+│ ├── notes.txt
+│ ├── package-lock.json
+│ ├── package.json
+│ └── server.js
+│
+└── screenshots/ # Project screenshots for README
+├── dashboard.png
+└── users.png
 
 ## UI Screenshot
 
