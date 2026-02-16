@@ -40,7 +40,7 @@ export const updateAdminProfile = async (req, res) => {
     );
     res.json({ status: true, message: "profile updated successfully !!" });
   } catch (err) {
-    return res.json({ status: false, message: err.message });
+    return res.json({ status: false, message: err.message, user: updatedUser });
   }
 };
 

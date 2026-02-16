@@ -7,12 +7,16 @@ import {
   verifyOtp,
   verifyOtpForgetPass,
 } from "../controllers/authController.js";
-import { signinUser, signupUser } from "../middleware/authMiddleware.js";
+import {
+  signinUser,
+  signupUser,
+  verifyToken,
+} from "../middleware/authMiddleware.js";
 import express from "express";
 
 const auth_Route = express.Router();
 
-auth_Route.get("/getCurrentUser", getCurrentUser);
+auth_Route.get("/getCurrentUser", verifyToken, getCurrentUser);
 
 auth_Route.post("/signup", signupUser, signup);
 auth_Route.post("/signin", signinUser, loginUser);

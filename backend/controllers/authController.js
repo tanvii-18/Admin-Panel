@@ -83,54 +83,50 @@ export const loginUser = async (req, res) => {
 };
 
 //* otp verification
-
 export const verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
 
   try {
     const otpRecord = await otpCollection.findOne({ email, otp });
 
-    // comparing otp with database otp
-
     if (!otpRecord) {
-      return res.status(400).json({ status: false, message: "OTP not found." });
+      return res.status(400).json({
+        status: false,
+        message: "OTP not found",
+      });
     }
 
-    if (otpRecord.otp !== otp) {
-      return res.status(400).json({ status: false, message: "Incorrect OTP." });
-    }
-
-    if (otpRecord.expiryAt < new Date(Date.now())) {
-      return res.status(400).json({ status: false, message: "OTP expired." });
+    if (otpRecord.expiryAt < new Date()) {
+      return res.status(400).json({
+        status: false,
+        message: "OTP expired",
+      });
     }
 
     await otpCollection.deleteMany({ email });
 
     const user = await AuthCollection.findOne({ email });
 
-    const token = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.SECRET_KEY,
-      {
-        expiresIn: "1d",
-      },
-    );
-    res.cookie("auth_token", token, {
-      maxAge: 1000 * 60 * 60 * 24,
-      sameSite: "strict",
-      httpOnly: true,
+    const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
+      expiresIn: "1d",
     });
 
-    res.json({
+    res.cookie("auth_token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24,
+    });
+
+    return res.json({
       status: true,
-      message: "OTP is verified & Signin successfully !",
+      message: "Login successful",
     });
   } catch (error) {
-    console.log("Catch block", error);
-
-    return res
-      .status(500)
-      .json({ status: false, message: "OTP Verification Failed!" });
+    return res.status(500).json({
+      status: false,
+      message: error.message,
+    });
   }
 };
 
@@ -213,23 +209,39 @@ export const verifyOtpForgetPass = async (req, res) => {
 export const getCurrentUser = async (req, res) => {
   try {
     const token = req.cookies.auth_token;
-    const decoded = jwt.verify(token, process.env.SECRET_KEY, {
-      expiresIn: "1d",
-    });
-    if (decoded) {
-      const user = await AuthCollection.findById(decoded._doc._id).populate(
-        "user",
-        "-createdAt -__v -updatedAt",
-      );
-      return res.json({
-        status: true,
-        message: "Current user fetched successfully !",
-        user,
+
+    if (!token) {
+      return res.status(401).json({
+        status: false,
+        message: "No token provided",
       });
     }
+
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+
+    const user = await AuthCollection.findById(decoded.id).populate(
+      "user",
+      "-createdAt -__v -updatedAt",
+    );
+
+    if (!user) {
+      return res.json({
+        status: false,
+        message: "User not found",
+      });
+    }
+
+    return res.json({
+      status: true,
+      message: "Current user fetched successfully!",
+      user,
+    });
   } catch (err) {
     console.log(err.message);
-    return res.json({ status: false, message: err.message });
+    return res.json({
+      status: false,
+      message: err.message,
+    });
   }
 };
 

@@ -9,7 +9,7 @@ export default function Sidebar_dashboard() {
         <div>
           <div className="bg-white shadow-md rounded-lg p-3 mb-6 flex items-center gap-4">
             <img
-              src="https://i.pravatar.cc/100"
+              src="../public/profile.jpg"
               alt="Admin"
               className="w-12 h-12 rounded-full object-cover border-2 border-black"
             />
