@@ -51,10 +51,10 @@ This Admin Panel is a scalable MERN stack application designed for managing user
 ## UI Preview ✨
 
 <p align="center">
-  <a href="login">
+  <a href="">
   <img width="49%" alt="Screenshot 2026-02-16 235729" src="https://github.com/user-attachments/assets/2f503365-01d1-4fc4-86d9-b89b0036586c" />
   </a>
-  <a href="dashboard">
+  <a href="">
     <img width="49%" alt="Screenshot 2026-02-16 234041" src="https://github.com/user-attachments/assets/f7320886-d77e-4b24-b677-50085851a4ea" />
   </a>
 </p>
